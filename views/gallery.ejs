@@ -1,0 +1,38 @@
+<!--import header-->
+<%- include('includes/header.ejs') %>
+
+
+    <div class="gallery container">
+
+        <!--display images-->
+        <h1>Image Gallery</h1>
+        <div class="row">
+            <% imageList.forEach(function(item) { %>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="thumbnail">
+
+                        <img class="gallery-image" src="images/<%=item.images %>" alt="">
+
+                    </div>
+
+                </div>
+                <% }); %>
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!--import footer-->
+
+    <%- include('includes/footer.ejs') %>

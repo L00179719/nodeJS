@@ -1,0 +1,136 @@
+<!--import header-->
+<%- include('includes/header.ejs') %>
+
+
+
+    <div class="container">
+
+
+        <section id="rooms-intro" class="text-center">
+            <h1 class="sub-headline">Choose</h1>
+            <h2 class="headline headline-dark">Your Room</h2>
+            <div class="asterisk"><i class="fas fa-asterisk"></i></div>
+            <div class="room-text">
+                <div class="mb-5 alert-danger" role="alert">
+
+                    <!--flash messages if room not available -->
+                    <%-alert%>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <section id="rooms" class="container">
+
+            <div class="row">
+                <% imageList.forEach(function(item) { %>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <img src="images/<%=item.images %>" alt="">
+                                <h3>
+                                    <%=item.type %>
+                                </h3>
+                                <p>
+                                    <%=item.description %>
+
+
+                                </p>
+                                <div class="price">
+                                    <!--get price from js file -->
+                                    <strong>€<%=item.price %>/night</strong>
+
+                                </div>
+                                <!--get room qty from js file -->
+
+
+                                <div class="icons d-flex flex-row justify-content-center">
+                                    <div class="p-4">
+                                        <i class="fa-solid fa-mug-hot"></i>
+                                    </div>
+                                    <div class="p-4">
+                                        <i class="fa-solid fa-wifi"></i>
+                                    </div>
+                                    <div class="p-4">
+                                        <i class="fa-solid fa-square-parking"></i>
+                                    </div>
+                                    <div class="p-4">
+                                        <i class="fa-solid fa-tv"></i>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <% }); %>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!--Booking Form-->
+        <section class="container book" id="book">
+            <div class="contact">
+
+
+            </div>
+
+
+            <div class="login-page-form text-center ">
+
+                <form id="sendBooking" class="" action="/bookingform" method="POST">
+
+
+
+
+                    <select class="form-control inputBox form-select" id="selectroom" name="selectroom">
+                        <% imageList.forEach(function(item) { %>
+
+
+                            <option value="<%=item.type %>">
+                                <%=item.type %>
+                            </option>
+                            <% }); %>
+
+                    </select>
+
+                    <input type="text" id="fullname" name="fullname" class="mt-3 form-control" placeholder="fullname"
+                        required>
+                    <input type="email" id="email" name="email" class="mt-3 form-control" placeholder="email" required>
+                    <input type="tel" id="phone" minlength="8" name="phone" class="mt-3 form-control"
+                        placeholder="phone" required>
+
+
+
+
+                    <div class="mt-5">
+                        <button id="submitreservation" type="submit" class="btn btn-lg">Send
+                            Reservation</button>
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+    <!--import footer-->
+    <%- include('includes/footer.ejs') %>

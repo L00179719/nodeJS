@@ -1,0 +1,56 @@
+<!--import header-->
+<%- include('includes/header.ejs') %>
+
+
+
+    <section class="container book" id="book">
+        <div class="contact">
+
+            <h1 class="sub-headline">Edit Booking</h1>
+
+        </div>
+
+
+        <!--Populate from fields with variables sent from js file -->
+        <div id="book-table" class="my-button row">
+
+            <div class="image">
+                <img src="images/culinary2.jpg" alt="">
+            </div>
+
+            <form class="home-book" action="" method="POST">
+                <div class="inputBox">
+
+                    <input type="text" name="name" value="<%=resbookinglist.name%>">
+                </div>
+
+                <div class="inputBox">
+
+                    <input type="date" id="bookingdate" name="bookingdate" value="<%=resbookinglist.bookingdate%>">
+                </div>
+                <div class="inputBox">
+
+                    <input type="time" id="bookingtime" name="bookingtime" value="<%=resbookinglist.bookingtime%>">
+                </div>
+                <div class="inputBox">
+
+                    <input type="number" id="persons" name="persons" value="<%=resbookinglist.persons%>">
+                </div>
+                <div class="inputBox">
+
+                    <input type="phone" id="phone" name="phone" value="<%=resbookinglist.phone%>">
+                </div>
+
+                <div class="form-button">
+                    <input type="submit" class="mt-4 btn" value="Save">
+                    <input type="hidden" value="<%=resbookinglist.id%>">
+                </div>
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!--import footer-->
+    <%- include('includes/footer.ejs') %>

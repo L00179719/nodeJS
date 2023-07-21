@@ -1,0 +1,96 @@
+<!--Import header-->
+<%- include('includes/header.ejs') %>
+    <style>
+
+    </style>
+
+    <div class="container  my-5" id="summary">
+        <h3 class="fs-4 mb-3">
+        </h3>
+        <div class="col">
+
+            <div class="mb-5 alert-success" role="alert">
+
+
+            </div>
+
+            <h2>Booking Summary</h2>
+
+            <p>Thank you, <%-fullname%>!<br>Reservation confirmed. Email has been sent to: <%=email%>.
+            </p>
+            <table class="table table-sm bg-white rounded shadow-sm  table-hover">
+
+                <thead>
+                    <tr>
+
+
+                        <th scope="col">Room</th>
+                        <th scope="col">Arrival</th>
+                        <th scope="col">Stays</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Pay now</th>
+                        <th scope="col">Pay later</th>
+
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+                    <tr>
+
+                        <td>
+
+                            <%-room%>
+                        </td>
+
+
+                        <td>
+                            <%-arrival%>
+
+                        <td>
+                            <%-stays%>
+
+                        </td>
+
+
+                        <td>
+                            <%-price%>
+
+                        </td>
+                        <td>
+                            <!--Import Stripe form and display stripe key, total price and username-->
+                            <form action="/payment" method="POST">
+                                <script src="//checkout.stripe.com/v2/checkout.js" class="stripe-button"
+                                    data-key="<%= key %>" data-amount="<%= newPrice %>" data-currency="usd"
+                                    data-name="Hi, <%= username %>" data-description=" Ski Resort Online Booking"
+                                    data-locale="auto">
+                                    </script>
+                            </form>
+
+
+
+                        </td>
+
+                        <td>
+                            <a class="link-success" href="/customer"><i style="font-size: 26px; color: #e47911;"
+                                    class="fa-solid fa-arrow-right"></i></a>
+                        </td>
+
+                    </tr>
+
+
+
+                </tbody>
+
+
+
+            </table>
+            <p class="" style="color:red;">to pay use card no: 4242 4242 4242 4242</p>
+
+        </div>
+    </div>
+
+    <!--Import footer-->
+    <%- include('includes/footer.ejs') %>

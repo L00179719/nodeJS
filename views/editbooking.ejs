@@ -1,0 +1,49 @@
+<%- include('includes/header.ejs') %>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <!--EDIT BOOKING FORM POPULATED BY DATA SENT FROM JS FILE-->
+
+    <div class="login-page-form text-center">
+        <form class="" method="POST" action="">
+            <i class="mb-4 fas fa-bed text-center"></i>
+            <h3 class="mb-3 font-weight-normal">Edit booking</h3>
+
+            <input type="text" id="fullname" name="fullname" class=" mt-5 form-control"
+                value="<%=bookinglist.fullname%>" required autofocus>
+            <input type="email" id="email" name="email" class="mt-3 form-control" value="<%=bookinglist.email%>"
+                required autofocus>
+            <input type="phone" id="phone" name="phone" class="mt-3 form-control" value="<%=bookinglist.phone%>"
+                required autofocus>
+            <input type="date" id="arrival" name="arrival" class="mt-3 form-control" value="<%=bookinglist.arrival%>"
+                required autofocus>
+            <input type="number" id="stays" name="stays" class="mt-3 form-control" value="<%=bookinglist.stays%>"
+                required autofocus>
+            <input type="number" id="price" name="price" class="mt-3 form-control" value="<%=bookinglist.price%>"
+                required autofocus>
+            <input type="number" id="adults" name="adults" class="mt-3 form-control" value="<%=bookinglist.adults%>"
+                required autofocus>
+            <input type="number" id="children" name="children" class="mt-3 form-control"
+                value="<%=bookinglist.children%>" required autofocus>
+            <input type="text" id="selectroom" name="room" class="mt-3 form-control" value="<%=bookinglist.room%>"
+                required autofocus>
+
+            <div class="mt-5">
+                <input type="submit" id="editbookingbutton" class="mt-4 btn" value="Save">
+                <input type="hidden" value="<%=bookinglist.id%>">
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+
+
+
+
+    <%- include('includes/footer.ejs') %>

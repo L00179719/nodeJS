@@ -1,0 +1,80 @@
+<!--Import header-->
+<%- include('includes/header.ejs') %>
+
+
+    <!--JQuery CDN-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <div class="login-page-form text-center ">
+        <form class="" action="">
+            <i class="mb-4 fas fa-bed text-center"></i>
+            <h3 class="mb-3 font-weight-normal">Create new booking</h3>
+            <input type="text" id="fullname" class="mt-5 form-control" placeholder="fullname" required autofocus>
+            <input type="email" id="email" class="mt-3 form-control" placeholder="email" required autofocus>
+            <input type="phone" id="phone" class="mt-3 form-control" placeholder="phone" required autofocus>
+            <input type="date" id="arrival" class="mt-3 form-control" placeholder="arrival" required autofocus>
+            <input type="number" id="stays" class="mt-3 form-control" placeholder="stays" required autofocus>
+            <input type="number" id="price" class="mt-3 form-control" placeholder="total price" required autofocus>
+            <input type="number" id="adults" class="mt-3 form-control" placeholder="adults" required autofocus>
+            <input type="number" id="children" class="mt-3 form-control" placeholder="children" required autofocus>
+            <label class="inputBox" for="rooms">
+                <h4 class="mt-3">Room Type</h4>
+            </label>
+
+            <select class="inputBox" id="selectroom" name="rooms">
+                <option value="Standard Double">Standard Double</option>
+                <option value="Premium Double">Premium Double</option>
+                <option value="Suite">Suite</option>
+
+            </select>
+
+            <div class="mt-5">
+                <input type="submit" id="newbookingbutton" class="mt-4 btn" value="Create Booking">
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+
+
+    <script>
+
+        $("#newbookingbutton").click(function (event) {
+
+            event.preventDefault();
+
+            // grab the values from form
+            var room = $('#selectroom').val();
+            var arrival = $('#arrival').val();
+            var stays = $('#stays').val();
+            var adults = $('#adults').val();
+            var children = $('#children').val();
+            var fullname = $('#fullname').val();
+            var email = $('#email').val();
+            var phone = $('#phone').val();
+            var price = $('#price').val();
+
+
+
+            // send the data to the server-side
+            $.post("/newbooking", { room: room, arrival: arrival, stays: stays, adults: adults, children: children, fullname: fullname, email: email, price: price, phone: phone })
+                .done(function (data) {
+                    alert("New Booking Created " + data);
+                    window.location = "/bookings";
+                });
+
+
+
+        });
+
+    </script>
+
+
+    <!--Import footer-->
+    <%- include('includes/footer.ejs') %>

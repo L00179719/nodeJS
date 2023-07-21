@@ -1,0 +1,178 @@
+<!--import header-->
+<%- include('includes/header.ejs') %>
+
+
+    <body>
+
+        <div class="text-center">
+            <%-message%>
+        </div>
+
+
+
+        <!--Header Image and Title-->
+        <div class="bg-image text-center" style="background-image: url('images/predeal.jpg'); height: 100vh; background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;">
+            <h1 class="title">
+                Ski Resort Hotel
+            </h1>
+            <div class="asterisk"><i class="fas fa-asterisk"></i></div>
+            <p>
+                Elegance on top of the mountains
+            </p>
+            <a class="btn" href="#about-us">See More</a>
+        </div>
+
+
+
+
+
+
+
+
+        <!--About Section-->
+
+
+        <section id="about-us" class="my-button discover-our-story">
+            <div class="container">
+
+                <div class="about-us-section">
+                    <div class="about-description padding-right animate-left">
+                        <!-- multiple classes-->
+                        <div class="global-headline">
+
+                            <h2 class="sub-headline text-center">Discover</h2>
+                            <h2 class="headline headline-dark">Our Story</h2>
+                            <div class="asterisk"><i class="fas fa-asterisk"></i></div>
+                        </div>
+                        <p>
+                            Surrounded by the Carpathian Mountains right on the Clabucet ski slope, Ski Resort Hotel
+                            is
+                            offering the ideal place to enjoy summer & winter holidays.
+
+
+                        </p>
+
+
+                        <a href="rooms" class="btn body-btn">Check Rooms</a>
+                    </div>
+                    <div class="about-us-img animate-right">
+                        <img src="images/about.jpg" alt="#">
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!--Carousel section using Boostrap classes and Owl Carousel -->
+
+        <section id="slider" class="pt-5">
+            <div class="container">
+                <h2 class=" sub-headline text-center">What's on</h2><br><br>
+
+                <div class="slider">
+                    <div class="owl-carousel">
+                        <div class="slider-card text-center">
+                            <div class="d-flex justify-content-center align-items-center mb-4">
+                                <img src="images/Room.jpg" alt="">
+                            </div>
+                            <h5 class="mb-0"><b>Rooms</b></h5>
+                            <p class="p-4">Quality rooms with balcony, WiFi, parking and breakfast included
+
+                            </p>
+                            <a href="rooms" class="btn body-btn">discover more</a>
+                        </div>
+                        <div class="slider-card text-center">
+                            <div class="d-flex justify-content-center align-items-center mb-4">
+                                <img src="images/restaurant.jpg" alt="">
+                            </div>
+                            <h5 class="mb-0"><b>Dining</b></h5>
+                            <p class="p-4">Bavaria Restaurant offers authentic traditional food and a superb view of the
+                                ski slope.</p>
+                            <a href="restaurant" class="btn body-btn">discover more</a>
+                        </div>
+                        <div class="slider-card text-center">
+                            <div class="d-flex justify-content-center align-items-center mb-4">
+                                <img src="images/Everski.jpg" alt="">
+                            </div>
+                            <h5 class="mb-0"><b>Everski</b></h5>
+                            <p class="p-4">Rent Skis, Snowboards & Sleds from Everski center.</p>
+                            <a href="everski" class="btn body-btn">discover more</a>
+                        </div>
+                        <div class="slider-card text-center">
+                            <div class="d-flex justify-content-center align-items-center mb-4">
+                                <img src="images/castle.jpg" alt="">
+                            </div>
+                            <h5 class="mb-0"><b>Discover</b></h5>
+                            <p class="p-4">Discover the surroundings at a short distance from Ski Resort Hotel.
+                            </p>
+                            <a href="contact" class="btn body-btn">contact us for more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--Testimonials section using Boostrap classes-->
+
+        <section id="testimonials" class="container">
+            <h2 class=" sub-headline text-center">Testimonials</h2><br><br>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card-body text-center">
+                        <img src="images/profile1.jpg" class="img-fluid rounded-circle w-50 mb-3" alt="">
+                        <h3>Sussane</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam
+                            temporibus quidem magni qui doloribus quasi natus inventore nisi velit minima.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card-body text-center">
+                        <img src="images/profile2.jpg" class="img-fluid rounded-circle w-50 mb-3" alt="">
+                        <h3>Michelle</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam
+                            temporibus quidem magni qui doloribus quasi natus inventore nisi velit minima.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card-body text-center">
+                        <img src="images/profile3.jpg" class="img-fluid rounded-circle w-50 mb-3" alt="">
+                        <h3>John</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam
+                            temporibus quidem magni qui doloribus quasi natus inventore nisi velit minima.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card-body text-center">
+                        <img src="images/profile4.jpg" class="img-fluid rounded-circle w-50 mb-3" alt="">
+                        <h3>Kevin</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam
+                            temporibus quidem magni qui doloribus quasi natus inventore nisi velit minima.</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </section>
+
+
+
+
+
+        <!--import footer-->
+        <%- include('includes/footer.ejs') %>
+
+    </body>

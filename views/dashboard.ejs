@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Font awesome CDN-->
+    <script src="https://use.fontawesome.com/493e5f9de8.js"></script>
+
+
+    <!--Custom css-->
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/all.min.css">
+
+    <link rel="stylesheet" href="css/dash.css">
+    <link rel="stylesheet" href="css/main.css">
+
+
+
+
+
+    <!--Bootstrap and JQuery CDN's-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+
+
+    <title>Ski Resort</title>
+</head>
+
+<body>
+
+
+    <div class="d-flex" id="dashboard">
+        <!-- Sidebar -->
+        <div class="bg-white" id="sidebar-dashboard">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
+                    class="fas fa-hotel me-2"></i>Ski<span>Resort</span></div>
+            <div class="logo list-group list-group-flush my-3">
+                <a href="/dashboard" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                <a href="/bookings" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-list-ul me-2"></i>Hotel Bookings</a>
+                <a href="/restaurantbookings"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-utensils me-2"></i>Restaurant Bookings</a>
+
+                <a href="/createrooms"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-bed me-2"></i>Rooms</a>
+                <a href="/insertimages"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-image me-2"></i>Gallery</a>
+                <a href="/contactmessages"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-comment-dots me-2"></i>Contact Messages</a>
+                <a href="/newsletter"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-user me-2"></i>Newsletter</a>
+                <a href="/logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                        class="fas fa-power-off me-2"></i>Logout</a>
+            </div>
+        </div>
+        <!-- /#sidebar-dashboard -->
+
+        <!-- Page Content -->
+        <div id="page-content-dashboard">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+
+                    <!--Display current month on dashboard-->
+                    <h2 class="statistics-title fs-2 m-0"> 01 January to <span id="year"></span> </h2>
+
+
+
+
+
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-2"></i>
+
+                                <!--display username session-->
+                                <%-username%>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+
+
+
+
+            <div class="reports container-fluid px-4">
+                <div class="row g-3 my-2">
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">
+                                    <span id="totalReservations"></span>
+                                </h3>
+                                <p class="fs-5">Reservations</p>
+                            </div>
+                            <i class="fas fa-bed fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <!--get total tables booked from script -->
+                                <h3 class="fs-2"><span id="totalTables"></span></h3>
+                                <p class="fs-5">Tables Booked</p>
+                            </div>
+                            <i class="fas fa-utensils fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+
+                                <h3 class="fs-2">
+                                    <!--get total revenue this year so far from script -->
+                                    €<span id="totalRevenue"></span>
+
+                                </h3>
+
+                                <p class="fs-5">
+                                    Revenue 2022
+                                </p>
+
+
+                            </div>
+                            <i
+                                class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">
+                                    <!--get the increase percentage booked from script -->
+                                    %<span id="totalLastYear"></span>
+                                </h3>
+                                <p class="fs-5">Increase </p>
+                            </div>
+                            <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <!-- create charts -->
+                <div class="container">
+
+                    <div class=""><br><br><br>
+                        <!-- year revenue chart -->
+                        <canvas id="yearChart" width="150px" height="50px">
+                    </div><br><br><br>
+                    <div class="">
+                        <!-- revenue/room type -->
+                        <canvas id="roomChart" width="150px" height="60px">
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <script>
+
+        //get curent day, month, year
+
+
+        const date = new Date();
+
+        let year = date.getFullYear();
+        let month = ("0" + (date.getMonth() + 1)).slice(-2);
+        let day = ("0" + date.getDate()).slice(-2);
+
+        const day1 = date.getDate();        // 
+        const month1 = date.toLocaleString('default', { month: 'long' });   // 10 (Month is 0-based, so 10 means 11th Month)
+        const year1 = date.getFullYear();   // 2022
+
+        //get html span id and pass variables
+        document.getElementById("year").innerHTML = day + " " + month1 + " " + year;
+
+
+
+             //***************************//
+            //***total revenue for 2022***//
+            //****************************//
+            <% totalRevenue.forEach(function (item) { %>
+            var totalRevenue = '<%=item.total %>';
+
+
+            //sent total revenue to html span
+            document.getElementById("totalRevenue").innerHTML = totalRevenue;
+            <% }); %>
+
+
+             //***************************//
+            //***total revenue for 2021***//
+            //****************************//
+            <% lastYearRevenue.forEach(function (item) { %>
+            var totalLastYear = '<%=item.totalLastYear %>';
+                var increase = totalRevenue - totalLastYear;
+                var percentage = ((increase / totalLastYear) * 100).toFixed(0);
+
+
+
+
+                //sent total revenue to html span
+                document.getElementById("totalLastYear").innerHTML = percentage;
+                
+            <% }); %>
+
+
+            //***************************//
+            //***total reservations for 2022***//
+            //****************************//
+            <% totalReservations.forEach(function (item) { %>
+            var totalReservations = '<%=item.totalReservations %>';
+
+
+                    //sent total revenue to html span
+                    document.getElementById("totalReservations").innerHTML = totalReservations;
+            <% }); %>
+
+
+            //***************************//
+            //***total tables booked for 2022***//
+            //****************************//
+            <% totalTables.forEach(function (item) { %>
+            var totalTables = '<%=item.totalTables %>';
+
+
+                        //sent total revenue to html span
+                        document.getElementById("totalTables").innerHTML = totalTables;
+            <% }); %>
+
+
+             //***************************//
+            //***total standard rooms booked for 2022***//
+            //****************************//
+            <% totalStandard.forEach(function (item) { %>
+            var totalStandard = '<%=item.totalStandard %>';
+                                           
+            <% }); %>
+
+
+            //***************************//
+            //***total premium rooms booked for 2022***//
+            //****************************//
+            <% totalPremium.forEach(function (item) { %>
+            var totalPremium = '<%=item.totalPremium %>';
+                                           
+            <% }); %>
+
+
+            //***************************//
+            //***total suite rooms booked for 2022***//
+            //****************************//
+            <% totalSuite.forEach(function (item) { %>
+            var totalSuite = '<%=item.totalSuite %>';
+                                           
+            <% }); %>
+
+            //***************************//
+            //***total bookings january 2022***//
+            //****************************//
+            <% totalJanuary.forEach(function (item) { %>
+            var totalJanuary = '<%=item.totalJanuary %>';
+         <% }); %>
+
+         //***************************//
+            //***total bookings february 2022***//
+            //****************************//
+            <% totalFebruary.forEach(function (item) { %>
+            var totalFebruary = '<%=item.totalFebruary %>';
+         <% }); %>
+
+          //***************************//
+            //***total bookings march 2022***//
+            //****************************//
+            <% totalMarch.forEach(function (item) { %>
+            var totalMarch = '<%=item.totalMarch %>';
+         <% }); %>
+
+         //***************************//
+            //***total bookings april 2022***//
+            //****************************//
+            <% totalApril.forEach(function (item) { %>
+            var totalApril = '<%=item.totalApril %>';
+         <% }); %>
+
+          //***************************//
+            //***total bookings may 2022***//
+            //****************************//
+            <% totalMay.forEach(function (item) { %>
+            var totalMay = '<%=item.totalMay %>';
+         <% }); %>
+
+         //***************************//
+            //***total bookings june 2022***//
+            //****************************//
+            <% totalJune.forEach(function (item) { %>
+            var totalJune = '<%=item.totalJune %>';
+         <% }); %>
+
+          //***************************//
+            //***total bookings july 2022***//
+            //****************************//
+            <% totalJuly.forEach(function (item) { %>
+            var totalJuly = '<%=item.totalJuly %>';
+         <% }); %>
+
+         //***************************//
+            //***total bookings august 2022***//
+            //****************************//
+            <% totalAugust.forEach(function (item) { %>
+            var totalAugust = '<%=item.totalAugust %>';
+         <% }); %>
+
+          //***************************//
+            //***total bookings september 2022***//
+            //****************************//
+            <% totalSeptember.forEach(function (item) { %>
+            var totalSeptember = '<%=item.totalSeptember %>';
+         <% }); %>
+
+         //***************************//
+            //***total bookings october 2022***//
+            //****************************//
+            <% totalOctober.forEach(function (item) { %>
+            var totalOctober = '<%=item.totalOctober %>';
+         <% }); %>
+
+          //***************************//
+            //***total bookings november 2022***//
+            //****************************//
+            <% totalNovember.forEach(function (item) { %>
+            var totalNovember = '<%=item.totalNovember %>';
+         <% }); %>
+
+         //***************************//
+            //***total bookings december 2022***//
+            //****************************//
+            <% totalDecember.forEach(function (item) { %>
+            var totalDecember = '<%=item.totalDecember %>';
+         <% }); %>
+
+
+
+
+            //get canvas chart id
+            let yearChart = document.getElementById('yearChart').getContext('2d');
+        var juneSales = '15000';
+
+        // Global Options
+        Chart.defaults.global.defaultFontFamily = 'Lato';
+        Chart.defaults.global.defaultFontSize = 14;
+        Chart.defaults.global.defaultFontColor = '#777';
+
+        let salesPopChart = new Chart(yearChart, {
+            type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: { //assign months to chart
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [
+                        totalJanuary,
+                        totalFebruary,
+                        totalMarch,
+                        totalApril,
+                        totalMay,
+                        totalJune,
+                        totalJuly,
+                        totalAugust,
+                        totalSeptember,
+                        totalOctober,
+                        totalNovember,
+                        totalDecember
+
+                    ],
+                    //backgroundColor:'green',
+                    backgroundColor: '#e47911',
+                    borderWidth: 1,
+                    borderColor: '#343a40',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    //variable year
+                    text: year + ' by month',
+                    fontSize: 25
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000'
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+                tooltips: {
+                    enabled: true
+                }
+            }
+        });
+
+
+        let roomChart = document.getElementById('roomChart').getContext('2d');
+
+        // Global Options
+        Chart.defaults.global.defaultFontFamily = 'Lato';
+        Chart.defaults.global.defaultFontSize = 18;
+        Chart.defaults.global.defaultFontColor = '#777';
+
+        let roomPieChart = new Chart(roomChart, {
+            type: 'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: {
+                labels: ['Standard Double', 'Premium Double', 'Suite'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [
+                        //add total revenue selected on dashboard.js file
+                        totalStandard,
+                        totalPremium,
+                        totalSuite
+
+
+                    ],
+
+                    //backgroundColor:'green',
+                    backgroundColor: [
+                        '#343a40',
+                        '#e47911',
+                        '#6c757d'
+
+                    ],
+                    borderWidth: 1,
+                    borderColor: '#e47911',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#343a40'
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Sales by room type',
+                    fontSize: 25
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000'
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+                tooltips: {
+                    enabled: true
+                }
+            }
+        });
+
+    </script>
+
+
+
+
+    <script>
+
+
+        //toggle button function
+        var el = document.getElementById("dashboard");
+        var toggleButton = document.getElementById("menu-toggle");
+
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled");
+        };
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

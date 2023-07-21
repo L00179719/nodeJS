@@ -1,0 +1,96 @@
+<!--import header-->
+<%- include('includes/header.ejs') %>
+
+
+    <!--Captcha api-->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+
+
+
+    <div class="login-page-form text-center ">
+
+
+        <form id="register-form" action="/register" method="post">
+            <div class="mb-5 alert-danger" role="alert">
+
+                <!--flash messages if not register succesfull-->
+                <%-alert%>
+
+            </div>
+            <div class="mb-5 alert-danger" role="alert">
+
+                <!--flash messages if not register succesfull-->
+                <%-captchaMessage%>
+
+            </div>
+
+
+            <i class="mb-4 fas fa-user text-center"></i>
+            <h3 class="mb-3 font-weight-normal">Register Here</h3>
+
+
+            <span id="check-username"></span>
+            <input type="text" id="username" name="username" class="mt-3 form-control" placeholder="username" required
+                autofocus>
+            <input type="email" id="email" name="email" class="mt-3 form-control" placeholder="email" required>
+            <input type="password" id="password" name="password" class="mt-3 form-control" placeholder="password"
+                required autofocus>
+            <input type="password" id="confirmpassword" name="confirmpassword" class="mt-3 form-control"
+                placeholder="confirm password" required autofocus>
+
+
+            <p class="mt-3 form-register">Already have an account<a class="register" href="login"> Login here</a></p>
+
+            <div class="mt-5">
+                <!--reCaptcha html code with google account sitekey-->
+                <div class="g-recaptcha" data-sitekey="6Le64bIfAAAAAJhrt0u1W2nRNfFax4qebzhCFKCu"></div><br>
+
+
+
+                <div id="">
+                    <button id="submitbutton" type="submit" class="btn btn-lg">Register now </button>
+
+                </div>
+
+
+
+
+            </div>
+
+
+
+        </form>
+
+
+    </div>
+
+    <script>
+        //function for captcha submit button
+        $(document).ready(function () {
+            $('#register_form').submit(function () {
+                $(this).ajaxSubmit({
+                    error: function (xhr) {
+                        status('Error: ' + xhr.status);
+                    },
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+                // disable the page refresh.
+                return false;
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+    <!--import footer-->
+    <%- include('includes/footer.ejs') %>

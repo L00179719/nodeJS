@@ -1,0 +1,91 @@
+<!--Import header-->
+<%- include('includes/header.ejs') %>
+
+
+
+
+    <div class="container">
+
+        <section id="rooms-intro" class="text-center">
+            <h1 class="sub-headline">Discover</h1>
+            <h2 class="headline headline-dark">Our Rooms</h2>
+            <div class="asterisk"><i class="fas fa-asterisk"></i></div>
+            <div class="room-text">
+                <p>Ski Resort Hotel features free WiFi, free private parking and breakfast included. Each room has a
+                    flat-screen TV with cable channels. A terrace or balcony are featured in certain rooms. Rooms are
+                    fitted with a private bathroom fitted with a bath or shower. For your comfort, you will find
+                    slippers and free toiletries. </p>
+            </div>
+        </section>
+
+
+        <section id="rooms" class="container">
+
+            <div class="row">
+                <% imageList.forEach(function(item) { %>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <img src="images/<%=item.images %>" alt="">
+                                <h3>
+                                    <%=item.type %>
+                                </h3>
+                                <p>
+                                    <%=item.description %>
+
+
+                                </p>
+                                <div class="price">
+                                    <!--get price from js file -->
+                                    <strong>€<%=item.price %>/night</strong>
+
+                                </div>
+
+                                <div class="icons d-flex flex-row justify-content-center">
+                                    <div class="p-4">
+                                        <i class="fa-solid fa-mug-hot"></i>
+                                    </div>
+                                    <div class="p-4">
+                                        <i class="fa-solid fa-wifi"></i>
+                                    </div>
+                                    <div class="p-4">
+                                        <i class="fa-solid fa-square-parking"></i>
+                                    </div>
+                                    <div class="p-4">
+                                        <i class="fa-solid fa-tv"></i>
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <a href="book"><input type="submit" id="premiumbutton" class=" btn"
+                                            value="Book"></a>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+                    <% }); %>
+
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+
+
+
+    <!--import header-->
+    <%- include('includes/footer.ejs') %>

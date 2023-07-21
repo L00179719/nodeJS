@@ -1,0 +1,134 @@
+<%- include('includes/header.ejs') %>
+
+
+
+    <!--Booking Form-->
+    <section class="container book" id="book">
+        <div class="contact">
+
+            <h1 class="sub-headline" style="text-transform: capitalize;">Book your stay <%-username%>
+            </h1>
+
+        </div>
+
+
+
+
+
+        <div class="my-button row">
+
+            <div class="image">
+                <img src="images/book.jpg" alt="">
+            </div>
+
+            <!--Check availlability form-->
+            <form class="home-book" action="/book" method="POST">
+
+                <div class="inputBox">
+                    <h3>When</h3>
+                    <input type="date" id="arrival" name="arrival" required autofocus />
+                </div>
+                <div class="inputBox">
+                    <h3>How many nights</h3>
+                    <input type="number" min="1" max="20" id="stays" name="stays" required autofocus />
+                </div>
+                <div class="inputBox">
+                    <h3>Adults</h3>
+                    <input type="number" min="1" max="3" placeholder="0" id="adults" name="adults" required autofocus />
+                </div>
+                <div class="inputBox">
+                    <h3>Children</h3>
+                    <input type="number" min="0" max="3" value="0" id="children" name="children" required autofocus />
+                </div>
+                <div class="form-button">
+                    <a href="bookingform"><input type="submit" id="checkavailability" class="mt-4 btn"
+                            value="Availability"></a>
+                </div>
+            </form>
+
+        </div>
+
+    </section>
+
+
+
+    <script>
+
+        //getting today date and set it as minimum date
+
+        $(function () {
+
+            //current date
+            var dtToday = new Date();
+
+            //current day, month, year
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var minDate = year + '-' + month + '-' + day;
+
+            //set minimum date to html id=arrival
+            $('#arrival').attr('min', minDate);
+
+
+        })
+
+        $("").click(function (event) {
+
+            event.preventDefault();
+
+            // grab the values from form
+
+            var arrival = $('#arrival').val();
+            var stays = $('#stays').val();
+            var adults = $('#adults').val();
+            var children = $('#children').val();
+
+
+            //check if date selected
+            if (!arrival) {
+                alert('Choose arrival date');
+                return false;
+            }
+
+
+
+            //check if minimum 1 day selected
+            if (stays < 1) {
+                alert('Please select duration of your stay');
+                return false;
+
+            }
+            //check if minimum 1 adult selected
+
+            if (adults < 1) {
+                alert('Choose adults allowed up to 3');
+                return false;
+
+            }
+            // send the data to the server-side 
+            else {
+                $.post("/book", { arrival: arrival, stays: stays, adults: adults, children: children })
+                    .done(function (data) {
+                        alert("Availability: " + data);
+                        //redirect to final booking form
+                        window.location = "/bookingform";
+                    });
+            }
+
+
+
+        });
+
+    </script>
+
+
+
+
+    <%- include('includes/footer.ejs') %>

@@ -1,0 +1,84 @@
+<!--import header-->
+<%- include('includes/header.ejs') %>
+
+
+
+    <section class="container book" id="book">
+        <div class="contact">
+
+            <h1 class="sub-headline">Create New Booking</h1>
+
+        </div>
+
+
+        <div id="book-table" class="my-button row">
+
+            <div class="image">
+                <img src="images/culinary2.jpg" alt="">
+            </div>
+
+            <form class="home-book" action="">
+                <div class="inputBox">
+
+                    <input type="text" id="name" placeholder="Name">
+                </div>
+
+                <div class="inputBox">
+
+                    <input type="date" id="bookingdate">
+                </div>
+                <div class="inputBox">
+
+                    <input type="time" id="bookingtime">
+                </div>
+                <div class="inputBox">
+
+                    <input type="number" id="persons" placeholder="Number of persons">
+                </div>
+                <div class="inputBox">
+
+                    <input type="phone" id="phone" placeholder="Phone">
+                </div>
+
+                <div class="form-button">
+                    <input type="submit" id="reservetable" class="mt-4 btn" value="Create Booking">
+                </div>
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <script>
+
+        $("#reservetable").click(function (event) {
+
+            event.preventDefault();
+
+            // grab the values from form
+            var name = $('#name').val();
+            var bookingdate = $('#bookingdate').val();
+            var bookingtime = $('#bookingtime').val();
+            var persons = $('#persons').val();
+            var phone = $('#phone').val();
+
+
+            // send the data to the server-side
+            $.post("/restaurantnewbooking", { name: name, bookingdate: bookingdate, bookingtime: bookingtime, persons: persons, phone: phone })
+                .done(function (data) {
+                    alert("Restaurant: " + data);
+                    window.location = "/restaurantbookings";
+                });
+
+
+
+        });
+
+    </script>
+
+
+
+    <!--import footer-->
+
+    <%- include('includes/footer.ejs') %>

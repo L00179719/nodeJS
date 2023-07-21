@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,700;1,800;1,900&display=swap');
+@import url('https: //fonts.googleapis.com/css?family=Cabin|Herr+Von+Muellerhoff|Source+Sans+Pro: 400,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+/* Declare variables--fonts and colors-- */
+:root {
+    --main-font: 'Source Sans Pro', sans-serif;
+    --secondary-font: 'Herr Von Muellerhoff', cursive;
+    --body-font: 'Cabin', sans-serif;
+    --main-font-color-dark: #343a40;
+    --secondary-font-color: #e47911;
+    --body-font-color: #343a40;
+    --third-font-color: #e2e2e2;
+
+}
+
+.gallery {
+    padding: 1.2rem;
+}
+
+.gallery h1 {
+    font-size: 5.5rem;
+    font-family: var(--secondary-font);
+    color: var(--secondary-font-color);
+    text-align: center;
+    padding: 3rem;
+}
+
+.gallery-image {
+    display: block;
+    width: 100%;
+}
+
+.gallery img {
+    padding-top: 1.2rem;
+    cursor: pointer;
+    width: 400px;
+    /* You can set the dimensions to whatever you want */
+    height: 300px;
+    object-fit: cover;
+}

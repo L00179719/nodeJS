@@ -1,0 +1,115 @@
+<!--Import header-->
+<%- include('includes/header.ejs') %>
+    <div class="contact">
+
+        <h1 class="sub-headline">Contact Us</h1>
+
+    </div>
+    <div class="container contact-page">
+
+        <div class="contact-wrap">
+            <div class="contact-in">
+
+
+                <!--direct links to social websites, phone, email, location-->
+                <h2><a href="tel:Phone
+                    0700111222"><i class="fas fa-phone"></a></i>Phone</h2>
+                <p>0700111222</p>
+                <h2><a href="mailto:contact@skiresort.com"><i class="fas fa-envelope"></a></i>Email</h2>
+                <p>contact@skiresort.com</p>
+                <h2><a
+                        href="https://www.google.com/maps/place/Predeal+505300,+Romania/@45.4893536,25.5456157,13z/data=!3m1!4b1!4m5!3m4!1s0x40b341c24cbeabdd:0x510ebbfd3550475b!8m2!3d45.4963952!4d25.5815062"><i
+                            class="fas fa-map-marker"></a></i>Address</h2>
+                <p>Prdeal, Romania</p>
+                <ul>
+                    <li>
+                        <a href="https://www.instagram.com/?hl=en"><i class="fab fa-instagram"></i></a>
+
+                    </li>
+                    <li>
+                        <a href="#https://www.facebook.com/"><i class=" fab fa-facebook-square"></i></a>
+
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+
+                    </li>
+                    <li>
+                        <a href="https://www.tripadvisor.ie/"><i class="fab fa-tripadvisor"></i></a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="my-button contact-form contact-in">
+                <h1>Send a message</h1>
+                <form action="/contact" method="POST">
+                    <form id="" action="/register" method="post">
+                        <div class="mb-5 alert-success" role="alert">
+
+                            <!--Get message from server side when form submitted-->
+                            <%-message%>
+
+                        </div>
+                        <input type="text" onkeypress="acceptOnlyLetters(event)" name="name" id="name"
+                            class="contact-in-input" placeholder="Firstname" required>
+                        <input type="email" name="email" id="email" class="contact-in-input" placeholder="Email"
+                            required>
+                        <input type="tel" onkeypress="acceptOnlyNumbers(event)" name="phone" id="phone" minlength="8"
+                            class="contact-in-input" placeholder="Phone" required>
+                        <textarea placeholder="Message" id="message" class="contact-in-textarea" name="message"
+                            required></textarea>
+                        <input type="submit" value="SUBMIT" id="contact" class="btn">
+                    </form>
+
+            </div>
+
+
+            <!--Import google map link of the Resort's address-->
+
+            <div class="contact-in">
+
+                <div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no"
+                        marginheight="0" marginwidth="0"
+                        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Predeal+()&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a
+                            href="https://www.gps.ie/marine-gps/">shipping gps</a></iframe></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        //function to accept only letters for contact form name input 
+
+        function acceptOnlyLetters(evt) {
+
+            var letter = String.fromCharCode(evt.which);
+
+            if (!(/[a-z, A-Z]/.test(letter))) {
+                evt.preventDefault();
+            }
+
+        }
+
+        //function to accept only numbers for contact form phone input (input type=text)
+
+        function acceptOnlyNumbers(evt) {
+
+            var number = String.fromCharCode(evt.which);
+
+            if (!(/[0-9]/.test(number))) {
+                evt.preventDefault();
+            }
+
+        }
+    </script>
+
+
+
+
+    <!--Import footer-->
+    <%- include('includes/footer.ejs') %>

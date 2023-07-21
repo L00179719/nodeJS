@@ -1,0 +1,164 @@
+<!--Import header-->
+<%- include('includes/header.ejs') %>
+
+
+    <section class="my-button culinary-delight">
+        <div class="container">
+            <div class="mb-5 alert-success text-center" role="alert">
+
+                <!--flash messages if table booked succesfull-->
+                <%-message%>
+
+            </div>
+            <div class="about-us-section">
+                <div class="about-description padding-right animate-left">
+                    <!-- multiple classes-->
+                    <div class="global-headline">
+                        <h2 class="sub-headline">
+                            <span class="first-letter">C</span>ulinary
+                        </h2>
+                        <h1 class="headline headline-dark">Delight</h1>
+                        <div class="asterisk"><i class="fas fa-asterisk"></i></div>
+                    </div>
+                    <h4>Bavaria Restaurant</h4><br>
+                    <p>
+                        Situated on the first floor and with a capacity of 50 seats, Bavaria Restaurant offers an
+                        authentic Romanian menu and a superb view of the Clabucet ski slope. For dinner reservations
+                        please use the reservation form bellow.</p><br>
+                    <h5>Breakfast</h5>
+                    <p> Every morning, we offer a large selection of hot and cold items. Breakfast is served betwween
+                        07:00 and 10:00 AM.
+                    </p>
+                    <a href="#book-table" class="mb-5 btn body-btn">Make a reservation</a>
+                </div>
+                <div class="restaurant image-group">
+                    <img class="animate-top" src="images/culinary3.jpg" alt="">
+                    <img class="animate-bottom" src="images/culinary4.jpg" alt="">
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <section class="container book" id="book">
+        <div class="contact text-center">
+
+            <h1 class="sub-headline">Reserve your table</h1>
+            <p class="text center">Opening Hours 12:00 - 22:00</p>
+
+        </div>
+
+
+
+
+
+        <div id="book-table" class="my-button row">
+
+            <div class="image">
+                <img src="images/culinary2.jpg" alt="">
+            </div>
+
+            <form class="home-book" action="/restaurant" method="POST">
+
+                <div class="inputBox">
+
+                    <input type="text" id="name" name="name" placeholder="Firstname"
+                        onkeypress="acceptOnlyLetters(event)" required>
+                </div>
+
+                <div class="inputBox">
+
+                    <input type="date" id="bookingdate" name="bookingdate" required>
+                </div>
+                <div class="inputBox">
+
+                    <input type="time" id="bookingtime" min="12:00" max="22:00" name="bookingtime" required>
+                </div>
+                <div class="inputBox">
+
+                    <input type="number" id="persons" name="persons" min="1" max="10" placeholder="Number of persons"
+                        required>
+                </div>
+                <div class="inputBox">
+
+                    <input type="tel" id="phone" name="phone" minlength="8" onkeypress="acceptOnlyNumbers(event)"
+                        placeholder="Phone" required>
+                </div>
+
+                <div class="form-button">
+                    <input type="submit" id="reservetable" class="mt-4 btn" value="Reserve now">
+                </div>
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <script>
+
+
+
+        //function to accept only letters for name input 
+
+        function acceptOnlyLetters(evt) {
+
+            var letter = String.fromCharCode(evt.which);
+
+            if (!(/[a-z, A-Z]/.test(letter))) {
+                evt.preventDefault();
+
+            }
+
+        }
+
+        //function to accept only numbers for phone input (input type=text)
+
+        function acceptOnlyNumbers(evt) {
+
+            var number = String.fromCharCode(evt.which);
+
+            if (!(/[0-9]/.test(number))) {
+                evt.preventDefault();
+
+            }
+
+        }
+
+
+
+
+
+        //getting today date and set it as minimum date
+
+        $(function () {
+            //today date
+            var dtToday = new Date();
+
+            //month, day, year
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var minDate = year + '-' + month + '-' + day;
+
+            $('#bookingdate').attr('min', minDate);
+
+
+        })
+
+
+
+    </script>
+
+
+    <!--Import footer-->
+    <%- include('includes/footer.ejs') %>
