@@ -287,76 +287,53 @@ app.post('/sendnewsletter', function (req, res) {
 app.post('/register', function (req, res, next) {
 
 
-    if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
 
 
 
-        req.flash('captcha', 'reCAPTCHA required');
+    //grab values sent from client side form action=/register
+    var username = req.body.username;
+    var email = req.body.email;
+    var password = req.body.password;
+    var cpassword = req.body.confirmpassword;
 
-        res.redirect('/register');
-        return false;
+    if (cpassword == password) {
 
-    } else {
-        // secret key from google account
-        var secretKey = "6Le64bIfAAAAAF_UW9u663oJxhnfIItJPIrwCcgx";
 
-        // req.connection.remoteAddress will provide IP address of connected user
-        var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
-        // Hitting GET request to the URL, Google will respond with success or error scenario.
-        request(verificationUrl, function (error, response, body) {
-            body = JSON.parse(body);
-            // Success will be true or false depending upon captcha validation.
-            if (body.success !== undefined && !body.success) {
-                return res.json({ "responseCode": 1, "responseDesc": "Failed captcha verification" });
+        var sql = 'select * from login where username = ?;';
+
+        con.query(sql, [username], function (err, result, fields) {
+            if (err) throw err;
+
+            //if username found in database
+            if (result.length > 0) {
+                req.flash('message', 'Username  ' + username + ' already exist')
+                res.redirect('/register');
+
+
+
+            } else {
+
+                //using bcrypt to encrypt password
+                var hashpassword = bcrypt.hashSync(password, 10);
+                var sql = 'insert into login(username,email, userpassword) values(?,?,?);';
+
+                con.query(sql, [username, email, hashpassword], function (err, result, fields) {
+                    if (err) throw err;
+
+                    req.flash('message', 'Username ' + username + ' registered successfully')
+
+                    res.redirect('/login');
+                });
             }
-
         });
 
-
-        //grab values sent from client side form action=/register
-        var username = req.body.username;
-        var email = req.body.email;
-        var password = req.body.password;
-        var cpassword = req.body.confirmpassword;
-
-        if (cpassword == password) {
-
-
-            var sql = 'select * from login where username = ?;';
-
-            con.query(sql, [username], function (err, result, fields) {
-                if (err) throw err;
-
-                //if username found in database
-                if (result.length > 0) {
-                    req.flash('message', 'Username  ' + username + ' already exist')
-                    res.redirect('/register');
-
-
-
-                } else {
-
-                    //using bcrypt to encrypt password
-                    var hashpassword = bcrypt.hashSync(password, 10);
-                    var sql = 'insert into login(username,email, userpassword) values(?,?,?);';
-
-                    con.query(sql, [username, email, hashpassword], function (err, result, fields) {
-                        if (err) throw err;
-
-                        req.flash('message', 'Username ' + username + ' registered successfully')
-
-                        res.redirect('/login');
-                    });
-                }
-            });
-
-            //if password won't match
-        } else {
-            req.flash('message', 'Confirm Password does not match')
-            res.redirect('/register');
-        }
+        //if password won't match
+    } else {
+        req.flash('message', 'Confirm Password does not match')
+        res.redirect('/register');
     }
-});
+}
+);
 
 
 //---------------------------------------------------------------------------------------------------------//

@@ -6,8 +6,9 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
 
     host: "localhost",
-    user: "root",
-    password: "",
+    user: "adi",
+    password: "Mypass123$",
+    dateStrings: 'date',
     database: "project",
     timezone: 'utc'
 

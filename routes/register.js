@@ -7,8 +7,9 @@ const { parse } = require('json-parser')
 var con = mysql.createConnection({
 
     host: "localhost",
-    user: "root",
-    password: "",
+    user: "adi",
+    password: "Mypass123$",
+    dateStrings: 'date',
     database: "project",
     timezone: 'utc'
 
@@ -20,12 +21,12 @@ router.get('/', function (req, res, next) {
 
     //messages from app.js /register
     const alert = req.flash('message')
-    const captchaMessage = req.flash('captcha')
+    //const captchaMessage = req.flash('captcha')
 
 
 
     // rending the view and send variables to ejs page! 
-    res.render('register', { title: 'Express', alert, captchaMessage });
+    res.render('register', { title: 'Express', alert });
 
 
 

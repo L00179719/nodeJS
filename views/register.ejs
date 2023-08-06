@@ -68,23 +68,7 @@
 
     </div>
 
-    <script>
-        //function for captcha submit button
-        $(document).ready(function () {
-            $('#register_form').submit(function () {
-                $(this).ajaxSubmit({
-                    error: function (xhr) {
-                        status('Error: ' + xhr.status);
-                    },
-                    success: function (response) {
-                        console.log(response);
-                    }
-                });
-                // disable the page refresh.
-                return false;
-            });
-        });
-    </script>
+
 
 
 
