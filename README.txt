@@ -5,7 +5,7 @@ In order to run this app please:
 - import database to your local machine (if 2021 and 2022  data not available in database, the web may not show all statistics)
 - go to folder and open command line or open new terminal in Visual Studio Code
 - type : npm start
-- open http://localhost:3000/
+- open http://localhost:80/
 
 
 
