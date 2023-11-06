@@ -5,12 +5,11 @@ var mysql = require('mysql');
 //database connection
 var con = mysql.createConnection({
 
-    host: "localhost",
-    user: "adi",
-    password: "Mypass123$",
+    host: "rdsdb.clytkfjoovlo.us-east-1.rds.amazonaws.com",
+    user: "machiaveli",
+    password: "Machiaveli123",
     dateStrings: 'date',
-    database: "project",
-    timezone: 'utc'
+    database: "mydb",
 
 
 });

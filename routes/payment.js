@@ -5,16 +5,14 @@ var mysql = require('mysql');
 //database connection
 var con = mysql.createConnection({
 
-    host: "localhost",
-    user: "adi",
-    password: "Mypass123$",
+    host: "rdsdb.clytkfjoovlo.us-east-1.rds.amazonaws.com",
+    user: "machiaveli",
+    password: "Machiaveli123",
     dateStrings: 'date',
-    database: "project",
-    timezone: 'utc'
+    database: "mydb",
 
 
 });
-
 /* GET payment page. */
 router.get('/', function (req, res, next) {
     var Publishable_Key = 'pk_test_51KriHjBrbNjrgLjxH78DEVrFScHXO1oF8A0H5uHSF2pFz2mKLLD4DJZgvC2wRV5WeMjPtAGsdZUT4CswzSB9lHcI00xHb5EiZg'
