@@ -92,11 +92,11 @@ app.use(cookieParser('SecretStringForCookies'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());
-app.listen(80);
+app.listen(3000);
 
 
 //use routers
-app.use('/', indexRouter);
+app.use('/', loginRouter);
 app.use('/contact', contactRouter);
 app.use('/book', bookRouter);
 app.use('/dashboard', dashboardRouter);
@@ -138,7 +138,7 @@ app.use('/payment', paymentRouter);
 var con = mysql.createConnection({
 
     host: "rdsdb.clytkfjoovlo.us-east-1.rds.amazonaws.com",
-    user: "machiaveli",
+    user: "l00179719",
     password: "Machiaveli123",
     dateStrings: 'date',
     database: "mydb",
