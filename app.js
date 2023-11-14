@@ -137,7 +137,7 @@ app.use('/payment', paymentRouter);
 //database connection
 var con = mysql.createConnection({
 
-    host: "rdsdb.clytkfjoovlo.us-east-1.rds.amazonaws.com",
+    host: "hiit.clytkfjoovlo.us-east-1.rds.amazonaws.com",
     user: "l00179719",
     password: "Machiaveli123",
     dateStrings: 'date',
