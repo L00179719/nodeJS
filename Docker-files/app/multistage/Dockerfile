@@ -1,7 +1,7 @@
 FROM openjdk:11 AS BUILD_IMAGE
 RUN apt update && apt install maven -y
 RUN git clone https://github.com/L00179719/nodeJS.git
-RUN cd nodeJS && git checkout docker && mvn install
+RUN cd nodeJS && git checkout main && mvn install
 
 FROM tomcat:9-jre11
 
