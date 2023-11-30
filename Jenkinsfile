@@ -5,7 +5,7 @@ pipeline {
 	    jdk "OracleJDK11"
 	}
 
-    environment {
+    //environment {
         //registryCredential = 'ecr:us-east-1:awscreds'
         //appRegistry = "116594513860.dkr.ecr.us-east-1.amazonaws.com/l00179719appimg"
         //vprofileRegistry = "https://116594513860.dkr.ecr.us-east-1.amazonaws.com/"
@@ -40,7 +40,7 @@ pipeline {
         
 
         
-    }
+    //}
     
      
 }
