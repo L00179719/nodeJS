@@ -92,7 +92,7 @@ app.use(cookieParser('SecretStringForCookies'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());
-app.listen(80);
+app.listen(8080);
 
 
 //use routers
