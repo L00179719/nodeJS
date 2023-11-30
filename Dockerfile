@@ -15,7 +15,7 @@ RUN npm install bcrypt
 COPY . .
 
 # Expose the port the app runs on
-EXPOSE 80
+EXPOSE 8080
 
 # Define the command to run your app
 CMD ["node", "app.js"]
