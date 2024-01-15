@@ -1,0 +1,19 @@
+name: Generate SBOM
+
+on:
+  push:
+    
+
+jobs:
+  gen-sbom:
+    name: generate SBOM
+    runs-on: ubuntu-latest
+    steps:
+      -name: checkout
+       uses: actions/checkout@v3
+
+      -name: CycloneDX Node.js Generate SBOM
+       uses: CycloneDX/gh-node-module-generatebom@master
+       with:
+         path: ./
+         output: ./bom.json
