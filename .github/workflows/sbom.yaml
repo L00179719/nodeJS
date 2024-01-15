@@ -16,4 +16,4 @@ jobs:
        uses: CycloneDX/gh-node-module-generatebom@master
        with:
          path: ./
-         output: ./bom.json
+         output: ./bom.json #
