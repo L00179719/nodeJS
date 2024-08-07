@@ -1,0 +1,45 @@
+{
+    "version": "1.0.0",
+    "title": "Node.js Application Health Check",
+    "description": "An experiment to check the health of a Node.js application running on localhost port 8080",
+    "steady-state-hypothesis": {
+        "title": "Node.js application is healthy",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "front-service-must-be-ok",
+                "tolerance": 200,
+                "provider": {
+                    "type": "http",
+                    "url": "http://localhost:8080/contact"
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "simulate-failure",
+            "provider": {
+                "type": "process",
+                "path": "echo",
+                "arguments": [
+                    "Simulate some failure here"
+                ]
+            }
+        }
+    ],
+    "rollbacks": [
+        {
+            "type": "action",
+            "name": "restore-state",
+            "provider": {
+                "type": "process",
+                "path": "echo",
+                "arguments": [
+                    "Restore system to a healthy state"
+                ]
+            }
+        }
+    ]
+}

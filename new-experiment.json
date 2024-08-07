@@ -1,0 +1,41 @@
+{
+    "title": "Node.js Application Health Check",
+    "description": "An experiment to check the health of a Node.js application running on localhost port 8080",
+    "probes": [
+        {
+            "type": "probe",
+            "name": "front-service-must-be-ok",
+            "tolerance": 200,
+            "provider": {
+                "type": "http",
+                "url": "http://localhost:8080/contact"
+            }
+        },
+        {
+            "type": "probe",
+            "name": "front-service-does-not-return-an-error",
+            "tolerance": true,
+            "provider": {
+                "type": "python",
+                "module": "tolerances",
+                "func": "should_not_have_any_errors",
+                "arguments": {
+                    "filepath": "lab1/vegeta_results.json"
+                }
+            }
+        }
+    ],
+    "method": [
+        {
+            "type": "action",
+            "name": "simulate-failure",
+            "provider": {
+                "type": "process",
+                "path": "echo",
+                "arguments": [
+                    "Simulate some failure here"
+                ]
+            }
+        }
+    ]
+}
