@@ -60,4 +60,4 @@ jobs:
 }
           EOF
 
-          chaos run ec2-chaos-experiment.json
+          chaos run chaos-experiment-ec2.json
