@@ -1,0 +1,63 @@
+name: Run Chaos Toolkit Experiment
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  chaos-experiment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install Chaos Toolkit
+        run: |
+          python -m pip install --upgrade pip
+          pip install chaostoolkit chaostoolkit-aws
+
+      - name: Run Chaos Toolkit Experiment
+        run: |
+          cat <<EOF > ec2-chaos-experiment.json
+          {
+    "title": "Running Chaos Toolkit from an EC2 instance",
+    "description": "N/A",
+    "tags": [],
+    "steady-state-hypothesis": {
+        "title": "Current EC2 is RUNNING",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "instance_state",
+                "provider": {
+                    "type": "python",
+                    "module": "chaosaws.ec2.probes",
+                    "func": "instance_state",
+                    "arguments": {
+                        "state": "running",
+                        "instance_ids": [
+                            "i-01f2da831aa5ac9e8"
+                        ],
+                        "filters": []
+                    }
+                },
+                "tolerance": true
+            }
+        ]
+    },
+    "method": [],
+    "configuration": {
+        "aws_region": "eu-west-1"
+    }
+}
+          EOF
+
+          chaos run ec2-chaos-experiment.json

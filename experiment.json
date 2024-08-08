@@ -7,7 +7,7 @@
         "probes": [
             {
                 "type": "probe",
-                "name": "front-service-must-be-ok",
+                "name": "front-end-must-be-ok",
                 "tolerance": 200,
                 "provider": {
                     "type": "http",
