@@ -1,4 +1,4 @@
-kinname: Connect to EC2 and Echo Message
+name: Connect to EC2 and Echo Message
 
 on:
   push:
