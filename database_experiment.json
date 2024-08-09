@@ -20,9 +20,9 @@
           "func": "describe_db_instances",
           "arguments": {
             "db_instance_identifiers": [
-              "your-db-instance-id"
+              "116594513860"
             ],
-            "region": "your-region"
+            "region": "eu-west-1"
           }
         },
         "tolerance": {
