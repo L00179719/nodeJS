@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "title": "Test MariaDB Database Connection",
+  "description": "An experiment to test the connection to a MariaDB database.",
+  "steady-state-hypothesis": {
+    "title": "Database connection is successful",
+    "probes": [
+      {
+        "type": "probe",
+        "name": "check_database_connection",
+        "tolerance": 200,
+        "provider": {
+          "type": "python",
+          "module": "chaosaws.rds.probes",
+          "func": "check_connection",
+          "arguments": {
+            "host": "localhost",
+            "port": 3306,
+            "database": "chaos",
+            "username": "student",
+            "password": "Mach112255"
+          }
+        }
+      }
+    ]
+  },
+  "method": [],
+  "rollbacks": []
+}
