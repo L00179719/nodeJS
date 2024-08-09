@@ -1,24 +1,27 @@
 {
   "version": "1.0.0",
-  "title": "Database Connectivity Test for Node.js App",
-  "description": "An experiment to check the connectivity of a Node.js app to a MariaDB database.",
+  "title": "Test Database Connection and Stop Database",
+  "description": "An experiment to test the database connection and stop the database instance with identifier 'database-1-instance-1' in the eu-west-1 region.",
+  "tags": [
+    "database",
+    "aws",
+    "chaos"
+  ],
   "steady-state-hypothesis": {
-    "title": "Database connection is successful",
+    "title": "Database Connection is Healthy",
     "probes": [
       {
         "type": "probe",
         "name": "check_database_connection",
-        "tolerance": {
-          "type": "jsonpath",
-          "path": "$.status",
-          "expect": "connected"
-        },
+        "tolerance": 200,
         "provider": {
           "type": "python",
           "module": "chaosaws.rds.probes",
           "func": "describe_db_instances",
           "arguments": {
-            "db_instance_identifier": "mydbinstance", // Update with your DB instance identifier
+            "db_instance_identifiers": [
+              "database-1-instance-1"
+            ],
             "region": "eu-west-1"
           }
         }
@@ -28,13 +31,13 @@
   "method": [
     {
       "type": "action",
-      "name": "simulate_database_failure",
+      "name": "stop_database",
       "provider": {
         "type": "python",
         "module": "chaosaws.rds.actions",
         "func": "stop_db_instance",
         "arguments": {
-          "db_instance_identifier": "mydbinstance", // Update with your DB instance identifier
+          "db_instance_identifier": "database-1-instance-1",
           "region": "eu-west-1"
         }
       }
@@ -43,13 +46,13 @@
   "rollbacks": [
     {
       "type": "action",
-      "name": "restore_database",
+      "name": "start_database",
       "provider": {
         "type": "python",
         "module": "chaosaws.rds.actions",
         "func": "start_db_instance",
         "arguments": {
-          "db_instance_identifier": "mydbinstance", // Update with your DB instance identifier
+          "db_instance_identifier": "database-1-instance-1",
           "region": "eu-west-1"
         }
       }
