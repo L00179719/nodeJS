@@ -1,10 +1,10 @@
 {
   "version": "1.0.0",
-  "title": "Break Database Connection for Node.js App",
-  "description": "An experiment to break the database connection for a Node.js application by stopping the RDS database instance.",
+  "title": "Verify Database Connection for Node.js App",
+  "description": "An experiment to verify the database connection for a Node.js application.",
   "tags": [
     "database",
-    "aws",
+    "nodejs",
     "chaos"
   ],
   "steady-state-hypothesis": {
@@ -16,55 +16,18 @@
         "tolerance": 200,
         "provider": {
           "type": "python",
-          "module": "chaosaws.rds.probes",
-          "func": "describe_db_instances",
+          "module": "my_custom_module.probes",
+          "func": "verify_db_connection",
           "arguments": {
-            "client": {
-              "type": "aws",
-              "service": "rds",
-              "region": "eu-west-1"
-            }
+            "db_type": "mysql",
+            "host": "localhost",
+            "port": 3306,
+            "username": "your_username",
+            "password": "your_password",
+            "database": "your_database_name"
           }
         }
       }
     ]
-  },
-  "method": [
-    {
-      "type": "action",
-      "name": "stop_database",
-      "provider": {
-        "type": "python",
-        "module": "chaosaws.rds.actions",
-        "func": "stop_db_instance",
-        "arguments": {
-          "client": {
-            "type": "aws",
-            "service": "rds",
-            "region": "eu-west-1"
-          },
-          "db_instance_identifier": "database-1-instance-1"
-        }
-      }
-    }
-  ],
-  "rollbacks": [
-    {
-      "type": "action",
-      "name": "start_database",
-      "provider": {
-        "type": "python",
-        "module": "chaosaws.rds.actions",
-        "func": "start_db_instance",
-        "arguments": {
-          "client": {
-            "type": "aws",
-            "service": "rds",
-            "region": "eu-west-1"
-          },
-          "db_instance_identifier": "database-1-instance-1"
-        }
-      }
-    }
-  ]
+  }
 }
