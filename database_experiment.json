@@ -1,10 +1,10 @@
 {
   "version": "1.0.0",
-  "title": "Test Database Connection and Stop Database",
-  "description": "An experiment to test the database connection and stop the database instance with identifier 'database-1-instance-1' in the eu-west-1 region.",
+  "title": "Test Database Connection",
+  "description": "An experiment to test the connection of the application database.",
   "tags": [
     "database",
-    "aws",
+    "connection",
     "chaos"
   ],
   "steady-state-hypothesis": {
@@ -16,55 +16,20 @@
         "tolerance": 200,
         "provider": {
           "type": "python",
-          "module": "chaosaws.rds.probes",
-          "func": "describe_db_instances",
+          "module": "chaoslib.probes",
+          "func": "check_database_connection",
           "arguments": {
-            "client": {
-              "type": "aws",
-              "service": "rds",
-              "region": "eu-west-1"
-            }
+            "db_type": "mysql", // Change to your database type: mysql, postgres, etc.
+            "host": "database-1.cluster-cc0bmnspwen6.eu-west-1.rds.amazonaws.com", // Database host
+            "port": 3306, // Database port
+            "username": "admin", // Database username
+            "password": "Mach112255", // Database password
+            "database": "mydb" // Database name
           }
         }
       }
     ]
   },
-  "method": [
-    {
-      "type": "action",
-      "name": "stop_database",
-      "provider": {
-        "type": "python",
-        "module": "chaosaws.rds.actions",
-        "func": "stop_db_instance",
-        "arguments": {
-          "client": {
-            "type": "aws",
-            "service": "rds",
-            "region": "eu-west-1"
-          },
-          "db_instance_identifier": "database-1-instance-1"
-        }
-      }
-    }
-  ],
-  "rollbacks": [
-    {
-      "type": "action",
-      "name": "start_database",
-      "provider": {
-        "type": "python",
-        "module": "chaosaws.rds.actions",
-        "func": "start_db_instance",
-        "arguments": {
-          "client": {
-            "type": "aws",
-            "service": "rds",
-            "region": "eu-west-1"
-          },
-          "db_instance_identifier": "database-1-instance-1"
-        }
-      }
-    }
-  ]
+  "method": [],
+  "rollbacks": []
 }
