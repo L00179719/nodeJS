@@ -1,0 +1,44 @@
+title: Inject Failure into Node.js Database Connection
+description: This experiment simulates a failure in the database connection to test the resilience of the Node.js application.
+tags: [chaos, nodejs, database]
+
+steady-state-hypothesis:
+  title: Node.js Application is Connected to Database
+  probes:
+    - type: probe
+      name: check_database_connection
+      provider:
+        type: python
+        module: chaosaws.ec2.probes
+        func: instance_state
+        arguments:
+          state: running
+          instance_ids:
+            - i-01f2da831aa5ac9e8
+          filters: []
+      tolerance: true
+
+method:
+  - type: action
+    name: simulate_db_connection_failure
+    provider:
+      type: python
+      module: chaosaws.ec2.actions
+      func: stop_instance
+      arguments:
+        instance_id: i-01f2da831aa5ac9e8
+        region: eu-west-1
+
+rollback:
+  - type: action
+    name: restore_db_connection
+    provider:
+      type: python
+      module: chaosaws.ec2.actions
+      func: start_instance
+      arguments:
+        instance_id: i-01f2da831aa5ac9e8
+        region: eu-west-1
+
+configuration:
+  aws_region: eu-west-1
