@@ -1,34 +1,26 @@
 {
   "version": "1.0.0",
-  "title": "Test Database Connection",
-  "description": "An experiment to verify the connection to a MariaDB/MySQL database from a Node.js application.",
-  "tags": [
-    "database",
-    "connection",
-    "mariadb",
-    "mysql"
-  ],
+  "title": "Database Connectivity Test for Node.js App",
+  "description": "An experiment to check the connectivity of a Node.js app to a MariaDB database.",
   "steady-state-hypothesis": {
-    "title": "Database connection is healthy",
+    "title": "Database connection is successful",
     "probes": [
       {
         "type": "probe",
         "name": "check_database_connection",
+        "tolerance": {
+          "type": "jsonpath",
+          "path": "$.status",
+          "expect": "connected"
+        },
         "provider": {
           "type": "python",
           "module": "chaosaws.rds.probes",
           "func": "describe_db_instances",
           "arguments": {
-            "db_instance_identifiers": [
-              "116594513860"
-            ],
+            "db_instance_identifier": "database-1-instance-1", // Update with your DB instance identifier
             "region": "eu-west-1"
           }
-        },
-        "tolerance": {
-          "type": "jsonpath",
-          "path": "$.DBInstances[0].DBInstanceStatus",
-          "expect": "available"
         }
       }
     ]
@@ -38,24 +30,28 @@
       "type": "action",
       "name": "simulate_database_failure",
       "provider": {
-        "type": "process",
-        "path": "echo",
-        "arguments": [
-          "Simulate database failure (e.g., by stopping the database)"
-        ]
+        "type": "python",
+        "module": "chaosaws.rds.actions",
+        "func": "stop_db_instance",
+        "arguments": {
+          "db_instance_identifier": "database-1-instance-1", // Update with your DB instance identifier
+          "region": "eu-west-1"
+        }
       }
     }
   ],
   "rollbacks": [
     {
       "type": "action",
-      "name": "restore_database_state",
+      "name": "restore_database",
       "provider": {
-        "type": "process",
-        "path": "echo",
-        "arguments": [
-          "Restore database to a healthy state (e.g., by starting the database)"
-        ]
+        "type": "python",
+        "module": "chaosaws.rds.actions",
+        "func": "start_db_instance",
+        "arguments": {
+          "db_instance_identifier": "database-1-instance-1", // Update with your DB instance identifier
+          "region": "eu-west-1"
+        }
       }
     }
   ]
