@@ -6,9 +6,9 @@ const { parse } = require('json-parser')
 
 var con = mysql.createConnection({
 
-    host: "rdsdb.clytkfjoovlo.us-east-1.rds.amazonaws.com",
-    user: "machiaveli",
-    password: "Machiaveli123",
+    host: "database-1.cluster-cc0bmnspwen6.eu-west-1.rds.amazonaws.com",
+    user: "admin",
+    password: "Mach112255",
     dateStrings: 'date',
     database: "mydb",
 
