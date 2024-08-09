@@ -1,29 +1,62 @@
 {
   "version": "1.0.0",
-  "title": "Test MariaDB Database Connection",
-  "description": "An experiment to test the connection to a MariaDB database.",
+  "title": "Test Database Connection",
+  "description": "An experiment to verify the connection to a MariaDB/MySQL database from a Node.js application.",
+  "tags": [
+    "database",
+    "connection",
+    "mariadb",
+    "mysql"
+  ],
   "steady-state-hypothesis": {
-    "title": "Database connection is successful",
+    "title": "Database connection is healthy",
     "probes": [
       {
         "type": "probe",
         "name": "check_database_connection",
-        "tolerance": 200,
         "provider": {
           "type": "python",
           "module": "chaosaws.rds.probes",
-          "func": "check_connection",
+          "func": "describe_db_instances",
           "arguments": {
-            "host": "localhost",
-            "port": 3306,
-            "database": "chaos",
-            "username": "student",
-            "password": "Mach112255"
+            "db_instance_identifiers": [
+              "your-db-instance-id"
+            ],
+            "region": "your-region"
           }
+        },
+        "tolerance": {
+          "type": "jsonpath",
+          "path": "$.DBInstances[0].DBInstanceStatus",
+          "expect": "available"
         }
       }
     ]
   },
-  "method": [],
-  "rollbacks": []
+  "method": [
+    {
+      "type": "action",
+      "name": "simulate_database_failure",
+      "provider": {
+        "type": "process",
+        "path": "echo",
+        "arguments": [
+          "Simulate database failure (e.g., by stopping the database)"
+        ]
+      }
+    }
+  ],
+  "rollbacks": [
+    {
+      "type": "action",
+      "name": "restore_database_state",
+      "provider": {
+        "type": "process",
+        "path": "echo",
+        "arguments": [
+          "Restore database to a healthy state (e.g., by starting the database)"
+        ]
+      }
+    }
+  ]
 }
