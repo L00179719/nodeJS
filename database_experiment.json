@@ -19,11 +19,10 @@
           "module": "chaosaws.rds.probes",
           "func": "describe_db_instances",
           "arguments": {
-            "client": {
-              "type": "aws",
-              "service": "rds",
-              "region": "eu-west-1"
-            }
+            "db_instance_identifiers": [
+              "database-1-instance-1"
+            ],
+            "region": "eu-west-1"
           }
         }
       }
@@ -38,12 +37,8 @@
         "module": "chaosaws.rds.actions",
         "func": "stop_db_instance",
         "arguments": {
-          "client": {
-            "type": "aws",
-            "service": "rds",
-            "region": "eu-west-1"
-          },
-          "db_instance_identifier": "database-1-instance-1"
+          "db_instance_identifier": "database-1-instance-1",
+          "region": "eu-west-1"
         }
       }
     }
@@ -57,12 +52,8 @@
         "module": "chaosaws.rds.actions",
         "func": "start_db_instance",
         "arguments": {
-          "client": {
-            "type": "aws",
-            "service": "rds",
-            "region": "eu-west-1"
-          },
-          "db_instance_identifier": "database-1-instance-1"
+          "db_instance_identifier": "database-1-instance-1",
+          "region": "eu-west-1"
         }
       }
     }
